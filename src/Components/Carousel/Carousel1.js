@@ -36,7 +36,7 @@ function Carousel1() {
               <img
                 className="d-block w-100"
                 src={slide.image}
-                alt="slider image"
+                alt="slider-image1"
               />
               <Carousel.Caption>
                 <h3 className="caption">{slide.caption}</h3>

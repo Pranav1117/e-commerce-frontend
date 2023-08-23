@@ -51,6 +51,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -79,6 +80,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top deal"
                               />
                             </Link>
                           </div>{" "}
@@ -107,6 +109,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -132,7 +135,7 @@ const HomePage = () => {
                         <>
                           <div key={index} className="abc">
                             <Link to={`/men/${item.subcategory}`}>
-                              <img
+                              <img alt="top-deal"
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
                               />
@@ -163,6 +166,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -200,6 +204,7 @@ const HomePage = () => {
                           <div key={index} className="abc">
                             <Link to={`/mobiles/${item.subcategory}`}>
                               <img
+                              alt="top deal"
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
                               />
@@ -230,6 +235,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -286,6 +292,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -314,6 +321,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -354,6 +362,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -382,6 +391,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -410,6 +420,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -438,6 +449,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}
@@ -466,6 +478,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="top-deal"
                               />
                             </Link>
                           </div>{" "}

@@ -3,11 +3,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Navbelt from "../Components/Navbelt/Navbelt";
 import Footer from "../Components/Footer/Footer";
+import { type } from "@testing-library/user-event/dist/type";
 const ProductDetails = () => {
   const params = useParams();
   console.log(params.id);
 
-  const product = params.id;
+  const product1 = params.id;
+  const product=parseInt(product1)
+  console.log(typeof(product))
 
   const [data, setData] = useState(null);
 
@@ -32,7 +35,7 @@ const ProductDetails = () => {
       <div className="detaipage-main-container">
         {data
           ? data
-              .filter((item) => item.ids == product)
+              .filter((item) => item.ids === product)
               .map((item) => {
                 return (
                   <div className="detail-main-container">

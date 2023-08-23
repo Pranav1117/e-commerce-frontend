@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HeaderCompo from "../Components/HeaderCompo";
+// import HeaderCompo from "../Components/HeaderCompo";
 import Navbelt from "../Components/Navbelt/Navbelt";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
@@ -14,7 +14,7 @@ const ProductSubcategory = () => {
   console.log(params);
   let subcategory = params.product;
 
-  const location = useLocation();
+  // const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const ProductSubcategory = () => {
                   <div key={index} className="subcatpage-content-wrapper">
                     <Link to={`/sub/${item.ids}`}>
                       <div className="subcatpage-avatar-container">
-                        <img src={item.image} />{" "}
+                        <img src={item.image} alt="avatar"/>{" "}
                       </div>
                       <div>Rating : {item.rating} / 5 </div>
 

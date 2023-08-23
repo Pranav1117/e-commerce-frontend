@@ -24,7 +24,7 @@ const Navbelt = () => {
     setOpen(!open);
   };
 
-  const dispatch=useDispatch()
+  // const dispatch=useDispatch()
   const state=useSelector((state)=>state.slice.value)
   console.log(state)
   return (
@@ -48,7 +48,7 @@ const Navbelt = () => {
             placeholder="Search for products"
             ></input>
           <button className="search-btn" type="submit">
-            <img src={searchicon} className="search-icon" />
+            <img src={searchicon} alt="search-icon" className="search-icon" />
           </button>
         </div>
 
@@ -82,7 +82,7 @@ const Navbelt = () => {
       <div className="search-bar-wrapper-mobile">
         <input className="search-bar" placeholder="Search for products"></input>
         <button className="search-btn" type="submit">
-          <img src={searchicon} className="search-icon-mobile" />
+          <img src={searchicon} alt="search" className="search-icon-mobile" />
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../Components/Logo/Logo";
+// import Logo from "../Components/Logo/Logo";
 import { useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -8,7 +8,7 @@ import Navbelt from "../Components/Navbelt/Navbelt";
 import { inc } from "../Feature/CounterSlice";
 import { useDispatch } from "react-redux";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer/Footer";
 
@@ -26,7 +26,9 @@ const ProductCategory = () => {
 
   const fetchData = async () => {
     try {
-      let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
+      let resp = await axios(
+        "https://e-commerce-backend-cpp5.onrender.com/data"
+      );
       setData(resp.data);
     } catch (err) {
       console.log(err);
@@ -51,6 +53,7 @@ const ProductCategory = () => {
   }, []);
 
   let a = "";
+  console.log(a);
   return (
     <div>
       <Navbelt />
@@ -67,7 +70,7 @@ const ProductCategory = () => {
                       <div className="categorypage-content-wrapper">
                         <Link to={`/sub/${item.ids}`}>
                           <div className="category-page-avatar-container">
-                            <img src={item.image} />{" "}
+                            <img src={item.image} alt="avatar" />{" "}
                           </div>
                           <div>Rating : {item.rating} / 5 </div>
 

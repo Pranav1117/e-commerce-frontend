@@ -12,7 +12,7 @@ const Register = () => {
     password: null,
   });
 
-  const [registerStatus, setRegisterStatus] = useState("");
+  // const [registerStatus, setRegisterStatus] = useState("");
 
   const navigate = useNavigate();
 
