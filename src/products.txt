@@ -1,0 +1,34 @@
+1.men clothing:-
+    a.tshirt
+    b.pants
+    c.shirts
+    d.jacket
+    e.shorts
+
+2.womenclothing:-
+    a.tops
+    b.pants
+    c.saree
+    d.dress
+    e.tshirt
+
+3.electronics:-
+    a.earphones
+    b.airpods
+    c.tv
+    d.powerbank
+    e.washing machine
+
+4.Mobiles
+    a.iphone
+    b.realme
+    c.samsung
+    d.redmi
+    e.oppo
+
+5.accessories:-
+    a.shoes
+    b.ties
+    c.cap
+    d.watch
+    e.sunglasses

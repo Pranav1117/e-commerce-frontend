@@ -1,0 +1,54 @@
+.logo-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(39, 37, 37);
+    padding: 0 2em 0 2em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0px 15px 15px -15px #969696
+}
+.link{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+.logo-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(39, 37, 37);
+    display: flex;
+    justify-content: center;
+    
+}
+
+.web-logo{
+    width: 5rem;
+}
+
+.black-txt{
+    color: white;
+    font-size: 2rem;
+    font-family: 'Livvic', sans-serif;
+    position: relative;
+    right: 1.2rem;
+    bottom: 0rem;
+    margin: 0;
+    top: 1rem;
+}
+.market-txt{
+    margin: 0;
+
+    margin-left: 1rem;
+    color: white;
+    font-size: 2rem;
+    font-family: 'Livvic', sans-serif;
+    position: relative;
+    right: 1rem;
+    top: 1rem;
+}
