@@ -9,7 +9,7 @@ import Footer from "../Components/Footer/Footer";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-
+let a=''
   const fetchData = async () => {
     try {
       let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
@@ -22,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     fetchData();
     console.log(data);
-  }, []);
+  }, [a]);
 
   return (
     <>
@@ -264,6 +264,7 @@ const HomePage = () => {
                               <img
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
+                                alt="avatar"
                               />
                             </Link>
                           </div>{" "}

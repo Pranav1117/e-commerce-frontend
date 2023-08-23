@@ -6,7 +6,7 @@ import usericon from "../../Media/Logo/user-logo.png";
 import carticon from "../../Media/Logo/cart-logo.png";
 import { Link } from "react-router-dom";
 import searchicon from "../../Media/Logo/search.png";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const Navbelt = () => {
   const [open, setOpen] = useState(false);

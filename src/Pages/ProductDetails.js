@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Navbelt from "../Components/Navbelt/Navbelt";
 import Footer from "../Components/Footer/Footer";
-import { type } from "@testing-library/user-event/dist/type";
+// import { type } from "@testing-library/user-event/dist/type";
 const ProductDetails = () => {
   const params = useParams();
   console.log(params.id);
@@ -21,11 +21,11 @@ const ProductDetails = () => {
     // console.log(data[2].ids);
     console.log(data);
   };
-
+let a=''
   useEffect(() => {
     fetchData();
   
-  }, []);
+  }, [a]);
 
 
 

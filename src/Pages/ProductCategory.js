@@ -14,6 +14,7 @@ import Footer from "../Components/Footer/Footer";
 
 const ProductCategory = () => {
   const params = useParams();
+  let aa=''
   console.log(params.category);
 
   let category = params.category;
@@ -50,7 +51,7 @@ const ProductCategory = () => {
   useEffect(() => {
     fetchData();
     console.log(data);
-  }, []);
+  }, [aa]);
 
   let a = "";
   console.log(a);

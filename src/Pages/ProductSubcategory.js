@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import HeaderCompo from "../Components/HeaderCompo";
 import Navbelt from "../Components/Navbelt/Navbelt";
-import { useLocation, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -13,7 +13,7 @@ const ProductSubcategory = () => {
   const params = useParams();
   console.log(params);
   let subcategory = params.product;
-
+let a=''
   // const location = useLocation();
 
   const dispatch = useDispatch();
@@ -21,11 +21,12 @@ const ProductSubcategory = () => {
   const fetchData = async () => {
     let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
     setData(resp.data);
+    console.log(resp)
   };
   useEffect(() => {
     fetchData();
     console.log(data);
-  }, []);
+  }, [a]);
 
   return (
     <>
