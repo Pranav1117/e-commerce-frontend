@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import Navbelt from "../Components/Navbelt/Navbelt";
+import Footer from "../Components/Footer/Footer";
 
 const Cart = () => {
   return (
-    <div>Cart</div>
-  )
-}
+    <>
+      <Navbelt />
+      <div className="order-wrapper">
+        <div className=""></div>
+        <div className=""></div>
+        <Footer/>
+      </div>
+    </>
+  );
+};
 
-export default Cart
+export default Cart;

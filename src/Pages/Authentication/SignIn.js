@@ -4,6 +4,7 @@ import "./auth.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import backbtn from "../../Media/Logo/back-icon.png";
+import axios from "axios";
 
 const SignIn = () => {
   const [data, setData] = useState({
@@ -18,8 +19,13 @@ const SignIn = () => {
     console.log(data);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const res = await axios.post(
+      "https://e-commerce-backend-cpp5.onrender.com/signin",
+      data
+    );
+    console.log(res.data);
   };
 
   const goBack = () => {

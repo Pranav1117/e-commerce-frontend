@@ -9,10 +9,12 @@ import Footer from "../Components/Footer/Footer";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-let a=''
+  let a = "";
   const fetchData = async () => {
     try {
-      let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
+      let resp = await axios(
+        "https://e-commerce-backend-cpp5.onrender.com/data"
+      );
       setData(resp.data);
     } catch (err) {
       console.log(err);
@@ -135,7 +137,8 @@ let a=''
                         <>
                           <div key={index} className="abc">
                             <Link to={`/men/${item.subcategory}`}>
-                              <img alt="top-deal"
+                              <img
+                                alt="top-deal"
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
                               />
@@ -204,7 +207,7 @@ let a=''
                           <div key={index} className="abc">
                             <Link to={`/mobiles/${item.subcategory}`}>
                               <img
-                              alt="top deal"
+                                alt="top deal"
                                 className="men-top-deal-avatar top-deal-avatar"
                                 src={item.image}
                               />
@@ -508,16 +511,41 @@ let a=''
             <p className="New-txt">New Out</p>
             <div className="women-new">
               {data.length > 0
-                ? data.filter((item) => item.ids === 113)
+                ? data
+                    .filter((item) => item.category === "women")
+                   .splice(4,2).map((item)=>{
+                    return <>
+                    <Link>
+                    <img src={item.image} alt="avatar" className="great-deals-women-img"/>
+                    <div>{item.product}</div>
+                    </Link>
+                    </>
+                   })
                 : "Loadingg"}
             </div>
           </div>
 
-          <div className="accessories-top-deal-card"></div>
+          <div className="accessories-top-deal-card">
+          <p className="New-txt">New Out</p>
+            <div className="women-new">
+              {data.length > 0
+                ? data
+                    .filter((item) => item.category === "accessories")
+                    .splice(3,2).map((item)=>{
+                      return <>
+                      <Link>
+                      <img src={item.image} alt="avatar" className="great-deals-accesories-img"/>
+                      <div>{item.product}</div></Link>
+  
+                      </>
+                     })
+                : "Loadingg"}
+            </div>
+          </div>
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

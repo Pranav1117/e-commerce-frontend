@@ -9,6 +9,8 @@ const Register = () => {
   const [data, setData] = useState({
     name: null,
     email: null,
+    phoneNo: null,
+    address: null,
     password: null,
   });
 
@@ -24,7 +26,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("https://e-commerce-backend-cpp5.onrender.com/register", data);
+    const res = await axios.post(
+      "https://e-commerce-backend-cpp5.onrender.com/register",
+      data
+    );
     console.log(res.data);
   };
 
@@ -80,7 +85,7 @@ const Register = () => {
                 type="text"
                 className="email-input-on-register"
                 placeholder="Enter ur phone number"
-                name="email"
+                name="phoneNo"
                 onChange={handleonChange}
               />
             </div>
@@ -90,7 +95,7 @@ const Register = () => {
                 type="text"
                 className="email-input-on-register"
                 placeholder="Enter ur address"
-                name="email"
+                name="address"
                 onChange={handleonChange}
               />
             </div>

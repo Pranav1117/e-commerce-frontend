@@ -149,7 +149,7 @@ const Navbar = () => {
             <div>
               {showWomen && (
                 <ul className="women-ul">
-                  <Link to="/women/tshirt">
+                  <Link to="/women/tshirts">
                     <li className="men-products">Tshirt</li>
                   </Link>
 
@@ -162,9 +162,9 @@ const Navbar = () => {
                     <li className="men-products">Trousers</li>{" "}
                   </Link>
 
-                  <Link to="/women/saree">
+                  <Link to="/women/blazers">
                     {" "}
-                    <li className="men-products">Saree</li>
+                    <li className="men-products">Blazer</li>
                   </Link>
 
                   <Link to="/women/dress">
