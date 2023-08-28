@@ -24,7 +24,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("http://localhost:3001/login", data);
+    const res = await axios.post("https://e-commerce-backend-cpp5.onrender.com/login", data);
     const response = res.data;
     console.log(response);
 

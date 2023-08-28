@@ -28,7 +28,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/register", data);
+      const res = await axios.post(
+        "https://e-commerce-backend-cpp5.onrender.com/register",
+        data
+      );
 
       const response = res.data;
       console.log(response);
