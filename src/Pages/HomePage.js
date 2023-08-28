@@ -34,7 +34,7 @@ const HomePage = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios.get("http://localhost:3001/data");
+      let resp = await axios.get("https://e-commerce-backend-cpp5.onrender.com/data");
       console.log(resp);
 
       setData(resp.data.data);

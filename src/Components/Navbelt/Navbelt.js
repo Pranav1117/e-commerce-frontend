@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { setItems, setName1 } from "../../Feature/CounterSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+
 const Navbelt = ({ isLoggedIn, name }) => {
   const nav = useNavigate();
 
@@ -43,10 +45,11 @@ const Navbelt = ({ isLoggedIn, name }) => {
       const token = localStorage.getItem("token");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("http://localhost:3001/logout");
+      const resp = await axios.get("https://e-commerce-backend-cpp5.onrender.com/logout");
       console.log(resp);
 
       localStorage.setItem("token", resp.data.token);
+      toast.success('User logged Out');
       setName1(false);
 
       nav("/");
@@ -77,7 +80,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("http://localhost:3001/cartitems");
+      const resp = await axios.get("https://e-commerce-backend-cpp5.onrender.com/cartitems");
       console.log(resp);
 
       dispatch(setItems(resp.data.length));
@@ -109,6 +112,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
 
   return (
     <div>
+       {/* <ToastContainer /> */}
       <div className="nav-belt">
         <div className="logo-policy-wrapper">
           <div className="logo-wrapper">
@@ -146,9 +150,9 @@ const Navbelt = ({ isLoggedIn, name }) => {
                 {isLoggedIn1 ? (
                   <>
                     <li className="name">{nam}</li>{" "}
-                    <li>
+                    {/* <li>
                       <Link to="/myacount"> {MyAccount}</Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link to="/notification">{Notification}</Link>
                     </li>

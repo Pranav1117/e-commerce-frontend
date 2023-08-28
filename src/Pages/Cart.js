@@ -54,7 +54,9 @@ const Cart = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("http://localhost:3001/cartitems");
+      const resp = await axios.get(
+        "https://e-commerce-backend-cpp5.onrender.com/cartitems"
+      );
       console.log(resp);
       setData({
         [data.name]: resp.data.name,
@@ -80,7 +82,10 @@ const Cart = () => {
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    let resp = await axios.post("http://localhost:3001/deleteitemcart", id);
+    let resp = await axios.post(
+      "https://e-commerce-backend-cpp5.onrender.com/deleteitemcart",
+      id
+    );
     setProducts(resp.data.w);
     console.log(resp);
   };
@@ -93,7 +98,10 @@ const Cart = () => {
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    let resp = await axios.post("http://localhost:3001/addtocart", id);
+    let resp = await axios.post(
+      "https://e-commerce-backend-cpp5.onrender.com/addtocart",
+      id
+    );
     setProducts(resp.data);
     // setQuantity(resp.data.quantity);
     console.log(resp);
@@ -106,7 +114,10 @@ const Cart = () => {
       ids: product,
     };
 
-    let resp = await axios.patch("http://localhost:3001/decreaseitemcart", id);
+    let resp = await axios.patch(
+      "https://e-commerce-backend-cpp5.onrender.com/decreaseitemcart",
+      id
+    );
     console.log(resp.data);
     dispatch(setItems(resp.data.length));
     setProducts(resp.data);
@@ -125,8 +136,12 @@ const Cart = () => {
       });
 
       // console.log(tempArr, "----------tempObj");
-      const resp = await axios.post("http://localhost:3001/orders", tempArr);
+      const resp = await axios.post(
+        "https://e-commerce-backend-cpp5.onrender.com/orders",
+        tempArr
+      );
       console.log(resp);
+      // toast.success("Order Placed Successfully");
       nav("/");
     } catch (error) {
       console.log(error);

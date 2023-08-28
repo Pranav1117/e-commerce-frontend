@@ -154,6 +154,10 @@ body{
 .menu-ul li:hover{
     background-color: black;
 }
+.name:hover{
+    background-color: white !important;
+    color: black !important;
+}
 
 .signin-link{
     text-decoration: none;
@@ -265,7 +269,7 @@ body{
 }
  .navbar-men{
     display: flex;
-    margin-top: 3rem;
+    margin-top: 2rem;
     flex-direction: column;
     border: none;
  }
@@ -285,7 +289,7 @@ ul{
     background-color: gray;
     z-index: 3;
     position: absolute;
-    top:9.06rem;
+    top:8.06rem;
     left: 6%;
  }
  
@@ -300,7 +304,7 @@ ul{
     background-color: gray;
     z-index: 3;
     position: absolute;
-    top:9.06rem;
+    top:8.06rem;
     left: 23%;
 }
 .women-ul li:hover{
@@ -313,7 +317,7 @@ ul{
     background-color: gray;
     z-index: 3;
     position: absolute;
-    top:9.06rem;
+    top:8.06rem;
     left: 41%;
 }
 .electronics-ul li:hover{
@@ -327,7 +331,7 @@ ul{
     background-color: gray;
     z-index: 3;
     position: absolute;
-    top:9.06rem;
+    top:8.06rem;
     left: 59%;
 }
 .accessories-ul li:hover{
@@ -341,7 +345,7 @@ ul{
     background-color: gray;
     z-index: 3;
     position: absolute;
-    top:9.06rem;
+    top:8.06rem;
     left: 76%;
 }
 .mobiles-ul li:hover{
@@ -1169,7 +1173,7 @@ font-size: 2rem;
     }
 .navbar-men{
     position: relative;
-    bottom: 1.2rem;
+    bottom: 0.6rem;
 }
 
     .search-bar-wrapper{

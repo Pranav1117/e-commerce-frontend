@@ -31,7 +31,7 @@ const ProductCategory = () => {
       const token = localStorage.getItem("token");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios("http://localhost:3001/data");
+      let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
       console.log(resp);
       setData(resp.data.data);
       dispatch(setLoggedInStatus(resp.data.isLoggedIn));
@@ -57,7 +57,7 @@ const ProductCategory = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios.post("http://localhost:3001/addtocart", id);
+      let resp = await axios.post("https://e-commerce-backend-cpp5.onrender.com/addtocart", id);
 
       dispatch(setItems(resp.data.item));
       notify();
