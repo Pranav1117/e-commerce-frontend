@@ -35,7 +35,9 @@ const Cart = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("http://localhost:3001/cartitems");
+      const resp = await axios.get(
+        "https://e-commerce-backend-cpp5.onrender.com/cartitems"
+      );
       console.log(resp.data);
 
       setProducts(resp.data);
