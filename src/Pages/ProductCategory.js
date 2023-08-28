@@ -5,21 +5,22 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbelt from "../Components/Navbelt/Navbelt";
-import { inc } from "../Feature/CounterSlice";
-import { useDispatch } from "react-redux";
-
-import { toast } from "react-toastify";
+import { setItems, setLoggedInStatus, setName1 } from "../Feature/CounterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import loadingicon from '../Media/Logo/loading-icon.jpg'
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer/Footer";
 
 const ProductCategory = () => {
   const params = useParams();
-  let aa=''
-  console.log(params.category);
+  let aa = "";
+
+  const isLoggedIn = useSelector((state) => state.slice.loggedIn);
 
   let category = params.category;
+
   const location = useLocation();
-  console.log(location);
 
   const dispatch = useDispatch();
 
@@ -27,34 +28,46 @@ const ProductCategory = () => {
 
   const fetchData = async () => {
     try {
-      let resp = await axios(
-        "https://e-commerce-backend-cpp5.onrender.com/data"
-      );
-      setData(resp.data);
+      const token = localStorage.getItem("token");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      let resp = await axios("http://localhost:3001/data");
+      console.log(resp);
+      setData(resp.data.data);
+      dispatch(setLoggedInStatus(resp.data.isLoggedIn));
+
+      dispatch(setName1(resp.data.name));
     } catch (err) {
       console.log(err);
     }
   };
 
-  const showToastMessage = () => {
-    toast.success("Success Notification !", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-  };
-
-  const handleAddCart = () => {
-    showToastMessage();
-
-    dispatch(inc());
-  };
-
   useEffect(() => {
     fetchData();
-    console.log(data);
-  }, [aa]);
+  }, [isLoggedIn]);
+
+  const notify = () => toast("Product added to cart");
+
+  const handleAddCart = async (product) => {
+    if (isLoggedIn) {
+      const id = {
+        ids: product,
+      };
+      const token = localStorage.getItem("token");
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      let resp = await axios.post("http://localhost:3001/addtocart", id);
+
+      dispatch(setItems(resp.data.item));
+      notify();
+      console.log(resp);
+    } else {
+      alert("Login First to add item in Cart");
+    }
+  };
 
   let a = "";
-  console.log(a);
   return (
     <div>
       <Navbelt />
@@ -78,13 +91,20 @@ const ProductCategory = () => {
                           <div className="product-name">{item.product}</div>
                           <div>Rs.{item.price}</div>
                         </Link>
-                        <button onClick={handleAddCart}>Add to Cart</button>
+                        <button
+                          onClick={async () => {
+                            handleAddCart(item.ids);
+                          }}
+                        >
+                          Add to Cart
+                        </button>
                       </div>
                     </>
                   );
                 })
             : "Loadingg"}
         </div>
+        <ToastContainer />;
       </div>
       <Footer />
     </div>

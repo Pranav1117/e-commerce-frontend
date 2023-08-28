@@ -1,64 +1,131 @@
 import React, { useEffect, useState } from "react";
 // import HeaderCompo from "../Components/HeaderCompo";
 import Navbelt from "../Components/Navbelt/Navbelt";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { inc } from "../Feature/CounterSlice";
 import Footer from "../Components/Footer/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import { setItems, setLoggedInStatus, setName1 } from "../Feature/CounterSlice";
 
 const ProductSubcategory = () => {
   const [data, setData] = useState([]);
+
+  const [loginMsg, setLoginMsg] = useState(null);
+
+  const state = useSelector((state) => state.slice.items);
+
+  const isLoggedIn = useSelector((state) => state.slice.loggedIn);
+
+  console.log(isLoggedIn);
+
   const params = useParams();
-  console.log(params);
+
   let subcategory = params.product;
-let a=''
-  // const location = useLocation();
+
+  let a = "";
 
   const dispatch = useDispatch();
 
+  const notify = () => toast("Product added to cart");
+
+  // const notifyLogIn = () => toast("Please log in first");
+
   const fetchData = async () => {
-    let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
-    setData(resp.data);
-    console.log(resp)
+    try {
+      const token = localStorage.getItem("token");
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      let resp = await axios("http://localhost:3001/data");
+
+      dispatch(setLoggedInStatus(resp.data.isLoggedIn));
+
+      dispatch(setName1(resp.data.name));
+
+      console.log(resp);
+      setData(resp.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const handleAddCart = async (product) => {
+    if (isLoggedIn) {
+      const id = {
+        ids: product,
+      };
+      const token = localStorage.getItem("token");
+
+      notify();
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      let resp = await axios.post("http://localhost:3001/addtocart", id);
+
+      dispatch(setItems(resp.data.item));
+    } else {
+      // notifyLogIn();
+      setLoginMsg("Login to add item to cart");
+      alert("Login to add item to cart");
+    }
+  };
+
   useEffect(() => {
     fetchData();
-    console.log(data);
-  }, [a]);
+  }, [isLoggedIn]);
 
   return (
     <>
       <Navbelt />
-      <div className="subcat-page-heading">{`Hot deals on ${subcategory}`}</div>
-      <div className="sub-catpage-main-container">
-        {data.length > 0
-          ? data
-              .filter((item) => item.subcategory === subcategory)
-              .map((item, index) => {
-                return (
-                  <div key={index} className="subcatpage-content-wrapper">
-                    <Link to={`/sub/${item.ids}`}>
-                      <div className="subcatpage-avatar-container">
-                        <img src={item.image} alt="avatar"/>{" "}
-                      </div>
-                      <div>Rating : {item.rating} / 5 </div>
+      <div className="subcat-page-heading"></div>
 
-                      <div className="product-name">{item.product}</div>
-                      <div>Rs.{item.price}</div>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        dispatch(inc());
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                );
-              })
-          : "Loadinng"}
+      <div className="sub-catpage-main-container">
+        {" "}
+        <div className="filter-subcat">
+          <p>Filter Category</p>
+          <Link to="/men">Men</Link>
+          <Link to="/women">Women</Link>
+          <Link to="/accessories">Accesories</Link>
+          <Link to="/electronics">Electronics</Link>
+          <Link to="/mobiles">Mobiles</Link>
+        </div>
+        <div className="vertical-line"></div>
+        <div className="subcat-content-container">
+          {/* {loginMsg} */}
+          {data.length > 0
+            ? data
+                .filter((item) => item.subcategory === subcategory)
+                .map((item, index) => {
+                  return (
+                    <div key={index} className="subcatpage-content-wrapper">
+                      <Link to={`/sub/${item.ids}`}>
+                        <div className="subcatpage-avatar-container">
+                          <img src={item.image} alt="avatar" />{" "}
+                        </div>
+
+                        <div>Rating : {item.rating} / 5 </div>
+
+                        <div className="product-name">{item.product}</div>
+
+                        <div>Rs.{item.price}</div>
+                      </Link>
+                      <button
+                        onClick={async () => {
+                          handleAddCart(item.ids);
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  );
+                })
+            : "Loadinng"}
+        </div>
+        <ToastContainer />
       </div>
       <Footer />
     </>

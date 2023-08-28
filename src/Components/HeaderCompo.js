@@ -3,12 +3,11 @@ import Navbelt from "./Navbelt/Navbelt";
 import Navbar from "./Navbar/Navbar.js";
 // import Footer from "./Footer/Footer";
 
-const HeaderCompo = () => {
+const HeaderCompo = ({ isLoggedIn, name }) => {
   return (
     <>
-      <Navbelt />
+      <Navbelt isLoggedIn={isLoggedIn} name={name} />
       <Navbar />
-      
     </>
   );
 };

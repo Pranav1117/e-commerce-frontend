@@ -1,41 +1,69 @@
 import React, { useEffect, useState } from "react";
 import "../mobileview.css";
+import { useLocation } from "react-router-dom";
 import HeaderCompo from "../Components/HeaderCompo";
 import "./menu.css";
 import Carousel1 from "../Components/Carousel/Carousel1";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
+import jwtDecode from "jwt-decode";
+import { useSelector } from "react-redux";
+import { setLoggedInStatus, setName1, setItems } from "../Feature/CounterSlice";
+import { useDispatch } from "react-redux";
 
 const HomePage = () => {
+  const state = useSelector((state) => state.slice.name);
+  const name1 = state;
+
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState("");
+
   const [data, setData] = useState([]);
+  
+  const [isLoggedIn, setLoggedIn] = useState(null);
+
+  let token = null;
+
   let a = "";
+
   const fetchData = async () => {
     try {
-      let resp = await axios(
-        "https://e-commerce-backend-cpp5.onrender.com/data"
-      );
-      setData(resp.data);
+      token = localStorage.getItem("token");
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      let resp = await axios.get("http://localhost:3001/data");
+      console.log(resp);
+
+      setData(resp.data.data);
+
+      setLoggedIn(resp.data.isLoggedIn);
+
+      dispatch(setLoggedInStatus(resp.data.isLoggedIn));
+
+      dispatch(setName1(resp.data.name));
+      
+      setName(resp.data.name);
     } catch (err) {
-      console.log(err);
+      setLoggedIn(false);
+
+      console.log({ msg: err, isLoggedIn: isLoggedIn });
     }
   };
 
   useEffect(() => {
     fetchData();
-    console.log(data);
+    
   }, [a]);
 
   return (
     <>
       <div>
-        <HeaderCompo />
+        <HeaderCompo isLoggedIn={isLoggedIn} name={name} />
         <Carousel1 />
-        {/* {data.length > 0
-        ? data.map((item) => {
-            return <>{item.product}</>;
-          })
-        : "loaddingg"} */}
+
         <div className="men-top-deal-container">
           <p className="top-deal-txt men-top-deal-txt">Men's Wear Top Deals</p>
           <div className="men-top-deal">
@@ -183,7 +211,7 @@ const HomePage = () => {
                     })
                 : "Loadingg"}
             </div>
-            <Link to="/men">
+            <Link to="/men" className="view">
               <div className="view-all-container-men">
                 <p className="">View All</p>
               </div>
@@ -339,7 +367,7 @@ const HomePage = () => {
                     })
                 : "Loadingg"}
             </div>
-            <Link to="/mobiles">
+            <Link to="/mobiles" className="view">
               <div className="view-all-container">
                 {" "}
                 <p className="">View All</p>
@@ -496,7 +524,7 @@ const HomePage = () => {
                     })
                 : "Loadingg"}
             </div>
-            <Link to="/electronics">
+            <Link to="/electronics" className="view">
               <div className="view-all-container">
                 {" "}
                 <p className="">View All</p>
@@ -506,39 +534,52 @@ const HomePage = () => {
         </div>
 
         <div className="women-accessories-top-deal-container">
-          <p>Great deals On</p>
           <div className="women-top-deal-card">
             <p className="New-txt">New Out</p>
             <div className="women-new">
               {data.length > 0
                 ? data
                     .filter((item) => item.category === "women")
-                   .splice(4,2).map((item)=>{
-                    return <>
-                    <Link>
-                    <img src={item.image} alt="avatar" className="great-deals-women-img"/>
-                    <div>{item.product}</div>
-                    </Link>
-                    </>
-                   })
+                    .splice(4, 4)
+                    .map((item) => {
+                      return (
+                        <>
+                          <Link className="" to={`/women/${item.subcategory}`}>
+                            <img
+                              src={item.image}
+                              alt="avatar"
+                              className="great-deals-women-img"
+                            />
+                            <div>{item.product}</div>
+                          </Link>
+                        </>
+                      );
+                    })
                 : "Loadingg"}
             </div>
           </div>
 
           <div className="accessories-top-deal-card">
-          <p className="New-txt">New Out</p>
+            <p className="New-txt">Deals on</p>
             <div className="women-new">
               {data.length > 0
                 ? data
                     .filter((item) => item.category === "accessories")
-                    .splice(3,2).map((item)=>{
-                      return <>
-                      <Link>
-                      <img src={item.image} alt="avatar" className="great-deals-accesories-img"/>
-                      <div>{item.product}</div></Link>
-  
-                      </>
-                     })
+                    .splice(3, 4)
+                    .map((item) => {
+                      return (
+                        <>
+                          <Link to={`/accessories/${item.subcategory}`}>
+                            <img
+                              src={item.image}
+                              alt="avatar"
+                              className="great-deals-accesories-img"
+                            />
+                            <div>{item.product}</div>
+                          </Link>
+                        </>
+                      );
+                    })
                 : "Loadingg"}
             </div>
           </div>

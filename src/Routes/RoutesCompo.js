@@ -7,7 +7,9 @@ import SignIn from "../Pages/Authentication/SignIn";
 import Register from "../Pages/Authentication/Register";
 import Cart from "../Pages/Cart";
 import ProductSubcategory from "../Pages/ProductSubcategory";
-
+import MyAccount from "../Pages/MyAccount";
+import MyOrders from "../Components/Orders/MyOrders";
+import Notification from "../Pages/Notification";
 const RoutesCompo = () => {
   return (
     <>
@@ -17,6 +19,10 @@ const RoutesCompo = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/myacount" element={<MyAccount />} />
+          <Route path="/profile" element={<MyAccount />} />
+          <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/notification" element={<Notification />} />
 
           {/* Subcategory Routes */}
           <Route path="/men/:product" element={<ProductSubcategory />} />

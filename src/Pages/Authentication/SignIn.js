@@ -12,6 +12,8 @@ const SignIn = () => {
     password: null,
   });
 
+  const [loginStatus, setLoginStatus] = useState("");
+
   const navigate = useNavigate();
 
   const handleonChange = (e) => {
@@ -21,11 +23,19 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
-      "https://e-commerce-backend-cpp5.onrender.com/signin",
-      data
-    );
-    console.log(res.data);
+
+    const res = await axios.post("http://localhost:3001/login", data);
+    const response = res.data;
+    console.log(response);
+
+    setLoginStatus(response.msg);
+
+    const token = response.token;
+    localStorage.setItem("token", token);
+
+    if (response.token) {
+      navigate("/", { state: response.name });
+    }
   };
 
   const goBack = () => {
@@ -74,6 +84,7 @@ const SignIn = () => {
           <button onClick={handleSubmit} className="signin-btn">
             Sign In
           </button>
+          {loginStatus}
           <Link className="create-acount-link" to="/register">
             New Here? Register first
           </Link>

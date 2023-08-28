@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import backbtn from "../../Media/Logo/back-icon.png";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+
 const Register = () => {
   const [data, setData] = useState({
     name: null,
@@ -14,7 +16,7 @@ const Register = () => {
     password: null,
   });
 
-  // const [registerStatus, setRegisterStatus] = useState("");
+  const [registerStatus, setRegisterStatus] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,12 +27,23 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3001/register", data);
 
-    const res = await axios.post(
-      "https://e-commerce-backend-cpp5.onrender.com/register",
-      data
-    );
-    console.log(res.data);
+      const response = res.data;
+      console.log(response);
+
+      const token = response.token;
+      localStorage.setItem("token", token);
+
+      setRegisterStatus(response.msg);
+      console.log(registerStatus);
+      if (response.token) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const goBack = () => {
