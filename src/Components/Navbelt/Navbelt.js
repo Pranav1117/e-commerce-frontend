@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { setItems, setName1 } from "../../Feature/CounterSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 const Navbelt = ({ isLoggedIn, name }) => {
   const nav = useNavigate();
@@ -36,7 +36,8 @@ const Navbelt = ({ isLoggedIn, name }) => {
   const SignIn = menu[2];
   const Register = menu[3];
   const [items, setItem] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [searchProducts, setSearchProducts] = useState();
+  const [resultProducts, setResultProducts] = useState();
 
   const dispatch = useDispatch();
 
@@ -45,11 +46,13 @@ const Navbelt = ({ isLoggedIn, name }) => {
       const token = localStorage.getItem("token");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("https://e-commerce-backend-cpp5.onrender.com/logout");
+      const resp = await axios.get(
+        "https://e-commerce-backend-cpp5.onrender.com/logout"
+      );
       console.log(resp);
 
       localStorage.setItem("token", resp.data.token);
-      toast.success('User logged Out');
+      toast.success("User logged Out");
       setName1(false);
 
       nav("/");
@@ -80,7 +83,9 @@ const Navbelt = ({ isLoggedIn, name }) => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const resp = await axios.get("https://e-commerce-backend-cpp5.onrender.com/cartitems");
+      const resp = await axios.get(
+        "https://e-commerce-backend-cpp5.onrender.com/cartitems"
+      );
       console.log(resp);
 
       dispatch(setItems(resp.data.length));
@@ -110,9 +115,25 @@ const Navbelt = ({ isLoggedIn, name }) => {
     // total1();
   }, [itemQuantity]);
 
+  const handleOnChange = (e) => {
+    setSearchProducts((e.target.name = e.target.value));
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    console.log(searchProducts);
+
+    const resp = await axios.get(
+      `http://localhost:3001/search/${searchProducts}`
+    );
+    setResultProducts(resp.data);
+    console.log(resp.data);
+    nav("/searchproducts", { state: resp.data });
+  };
+
   return (
     <div>
-       {/* <ToastContainer /> */}
+      {/* <ToastContainer /> */}
       <div className="nav-belt">
         <div className="logo-policy-wrapper">
           <div className="logo-wrapper">
@@ -130,8 +151,11 @@ const Navbelt = ({ isLoggedIn, name }) => {
           <input
             className="search-bar"
             placeholder="Search for products"
+            name="searchbar"
+            onChange={handleOnChange}
           ></input>
-          <button className="search-btn" type="submit">
+
+          <button className="search-btn" type="submit" onClick={handleSearch}>
             <img src={searchicon} alt="search-icon" className="search-icon" />
           </button>
         </div>
@@ -143,8 +167,10 @@ const Navbelt = ({ isLoggedIn, name }) => {
               <img src={carticon} alt="cart-logo" className="cart-icon" />
             </div>
           </Link>
+
           <div className="profile-icon-wrapper" onClick={handelOpen}>
             <img className="profile-icon" src={usericon} alt="logo" />
+
             {open && (
               <ul className="menu-ul">
                 {isLoggedIn1 ? (
@@ -177,6 +203,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
 
       <div className="search-bar-wrapper-mobile">
         <input className="search-bar" placeholder="Search for products"></input>
+
         <button className="search-btn" type="submit">
           <img src={searchicon} alt="search" className="search-icon-mobile" />
         </button>

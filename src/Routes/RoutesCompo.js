@@ -10,6 +10,7 @@ import ProductSubcategory from "../Pages/ProductSubcategory";
 import MyAccount from "../Pages/MyAccount";
 import MyOrders from "../Components/Orders/MyOrders";
 import Notification from "../Pages/Notification";
+import SearchProducts from "../Pages/SearchProducts";
 const RoutesCompo = () => {
   return (
     <>
@@ -23,7 +24,7 @@ const RoutesCompo = () => {
           <Route path="/profile" element={<MyAccount />} />
           <Route path="/myorders" element={<MyOrders />} />
           <Route path="/notification" element={<Notification />} />
-
+          <Route path="/searchproducts" element={<SearchProducts />} />
           {/* Subcategory Routes */}
           <Route path="/men/:product" element={<ProductSubcategory />} />
           <Route path="/women/:product" element={<ProductSubcategory />} />
