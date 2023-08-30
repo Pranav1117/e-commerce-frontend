@@ -10,9 +10,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { setItems, setLoggedInStatus, setName1 } from "../Feature/CounterSlice";
+import PopupMessage from "../Components/PopUpMsg/PopUpMsg";
 
 const ProductSubcategory = () => {
   const [data, setData] = useState([]);
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   const [loginMsg, setLoginMsg] = useState(null);
 
@@ -40,7 +47,9 @@ const ProductSubcategory = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
+      let resp = await axios(
+        "https://e-commerce-backend-cpp5.onrender.com/data"
+      );
 
       dispatch(setLoggedInStatus(resp.data.isLoggedIn));
 
@@ -64,13 +73,16 @@ const ProductSubcategory = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios.post("https://e-commerce-backend-cpp5.onrender.com/addtocart", id);
+      let resp = await axios.post(
+        "https://e-commerce-backend-cpp5.onrender.com/addtocart",
+        id
+      );
 
       dispatch(setItems(resp.data.item));
     } else {
       // notifyLogIn();
       setLoginMsg("Login to add item to cart");
-      alert("Login to add item to cart");
+      setShowPopup(true);
     }
   };
 
@@ -127,6 +139,12 @@ const ProductSubcategory = () => {
         </div>
         <ToastContainer />
       </div>
+      {showPopup && (
+        <PopupMessage
+          message="Login to Add Item to Cart"
+          onClose={closePopup}
+        />
+      )}
       <Footer />
     </>
   );

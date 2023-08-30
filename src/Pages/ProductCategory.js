@@ -7,14 +7,21 @@ import { Link } from "react-router-dom";
 import Navbelt from "../Components/Navbelt/Navbelt";
 import { setItems, setLoggedInStatus, setName1 } from "../Feature/CounterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import loadingicon from '../Media/Logo/loading-icon.jpg'
+import loadingicon from "../Media/Logo/loading-icon.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer/Footer";
+import PopupMessage from "../Components/PopUpMsg/PopUpMsg";
 
 const ProductCategory = () => {
   const params = useParams();
   let aa = "";
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   const isLoggedIn = useSelector((state) => state.slice.loggedIn);
 
@@ -31,7 +38,9 @@ const ProductCategory = () => {
       const token = localStorage.getItem("token");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios("https://e-commerce-backend-cpp5.onrender.com/data");
+      let resp = await axios(
+        "https://e-commerce-backend-cpp5.onrender.com/data"
+      );
       console.log(resp);
       setData(resp.data.data);
       dispatch(setLoggedInStatus(resp.data.isLoggedIn));
@@ -57,13 +66,16 @@ const ProductCategory = () => {
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      let resp = await axios.post("https://e-commerce-backend-cpp5.onrender.com/addtocart", id);
+      let resp = await axios.post(
+        "https://e-commerce-backend-cpp5.onrender.com/addtocart",
+        id
+      );
 
       dispatch(setItems(resp.data.item));
       notify();
       console.log(resp);
     } else {
-      alert("Login First to add item in Cart");
+      setShowPopup(true);
     }
   };
 
@@ -106,6 +118,12 @@ const ProductCategory = () => {
         </div>
         <ToastContainer />;
       </div>
+      {showPopup && (
+        <PopupMessage
+          message="Login to Add Item to Cart"
+          onClose={closePopup}
+        />
+      )}
       <Footer />
     </div>
   );

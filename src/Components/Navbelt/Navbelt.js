@@ -56,26 +56,11 @@ const Navbelt = ({ isLoggedIn, name }) => {
       setName1(false);
 
       nav("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const fetchProduct = async () => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-
-  //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-  //     const resp = await axios.get("http://localhost:3001/cartitems");
-  //     console.log(resp);
-  //     setProducts(resp.data);
-  //     return resp.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return [];
-  //   }
-  // };
 
   const fetchCartITems = async () => {
     try {
@@ -124,7 +109,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
     console.log(searchProducts);
 
     const resp = await axios.get(
-      `http://localhost:3001/search/${searchProducts}`
+      `https://e-commerce-backend-cpp5.onrender.com/search/${searchProducts}`
     );
     setResultProducts(resp.data);
     console.log(resp.data);

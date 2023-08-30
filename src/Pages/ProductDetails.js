@@ -7,9 +7,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setItems, setLoggedInStatus, setName1 } from "../Feature/CounterSlice";
+import PopupMessage from "../Components/PopUpMsg/PopUpMsg";
 
 const ProductDetails = () => {
   const params = useParams();
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
 
   const isLoggedIn = useSelector((state) => state.slice.loggedIn);
 
@@ -55,7 +63,7 @@ const ProductDetails = () => {
     } else {
       // notifyLogIn();
       // setLoginMsg("Login to add item to cart");
-      alert("Login to add item to cart");
+      setShowPopup(true)
     }
   };
 
@@ -124,6 +132,12 @@ const ProductDetails = () => {
         <p></p>
         <div className="more-product-wrapper"></div>
       </div>
+      {showPopup && (
+        <PopupMessage
+          message="Login to Add Item to Cart"
+          onClose={closePopup}
+        />
+      )}
       <Footer />
     </>
   );

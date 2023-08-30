@@ -10,10 +10,20 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
+import PopupMessage from "../Components/PopUpMsg/PopUpMsg";
 
 const Cart = () => {
   const nav = useNavigate();
   const state = useSelector((state) => state.slice.items);
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const [showErrPopup, setShowErrPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+    nav("/");
+  };
 
   const isLoggedIn = useSelector((state) => state.slice.loggedIn);
 
@@ -111,6 +121,10 @@ const Cart = () => {
 
   const notify = () => toast("Product added to cart");
 
+  const orderNotify = () => {
+    toast.success("Order Placed");
+  };
+
   const decreaseItem = async (product) => {
     const id = {
       ids: product,
@@ -143,10 +157,13 @@ const Cart = () => {
         tempArr
       );
       console.log(resp);
+      //  await orderNotify();
       // toast.success("Order Placed Successfully");
-      nav("/");
+      setShowPopup(true);
+      // nav("/");
     } catch (error) {
       console.log(error);
+      setShowErrPopup(true);
     }
   };
 
@@ -169,6 +186,7 @@ const Cart = () => {
   return (
     <>
       <Navbelt />
+
       <div className="order-wrapper">
         <div className="product-info-cart">
           {products.length > 0
@@ -241,6 +259,16 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      {showPopup && (
+        <PopupMessage
+          message="Your order has been placed successfully!"
+          onClose={closePopup}
+        />
+      )}
+
+      {showErrPopup && (
+        <PopupMessage message="Something Went Wrong!" onClose={closePopup} />
+      )}
       <Footer />
     </>
   );
