@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer/Footer";
 import PopupMessage from "../Components/PopUpMsg/PopUpMsg";
+import "../style.css";
 
 const ProductCategory = () => {
   const params = useParams();
@@ -83,38 +84,46 @@ const ProductCategory = () => {
   return (
     <div>
       <Navbelt />
+
       <div className="cat-page-heading">{`Upto 60% off on ${category} products`}</div>
       <div className="category-container">
         <div className="categorypage-content-container">
-          {data.length > 0
-            ? data
-                .filter((item) => item.category === category)
-                .map((item) => {
-                  a = item.subcategory;
-                  return (
-                    <>
-                      <div className="categorypage-content-wrapper">
-                        <Link to={`/sub/${item.ids}`}>
-                          <div className="category-page-avatar-container">
-                            <img src={item.image} alt="avatar" />{" "}
-                          </div>
-                          <div>Rating : {item.rating} / 5 </div>
+          {data.length > 0 ? (
+            data
+              .filter((item) => item.category === category)
+              .map((item) => {
+                a = item.subcategory;
+                return (
+                  <>
+                    <div className="categorypage-content-wrapper">
+                      <Link to={`/sub/${item.ids}`}>
+                        <div className="category-page-avatar-container">
+                          <img src={item.image} alt="avatar" />{" "}
+                        </div>
+                        <div>Rating : {item.rating} / 5 </div>
 
-                          <div className="product-name">{item.product}</div>
-                          <div>Rs.{item.price}</div>
-                        </Link>
-                        <button
-                          onClick={async () => {
-                            handleAddCart(item.ids);
-                          }}
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </>
-                  );
-                })
-            : "Loadingg"}
+                        <div className="product-name">{item.product}</div>
+                        <div>Rs.{item.price}</div>
+                      </Link>
+                      <button
+                        onClick={async () => {
+                          handleAddCart(item.ids);
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </>
+                );
+              })
+          ) : (
+            <div class="wrap">
+              <div class="loading">
+                <div class="bounceball"></div>
+                <div class="text">NOW LOADING...</div>
+              </div>
+            </div>
+          )}
         </div>
         <ToastContainer />;
       </div>
