@@ -48,7 +48,7 @@ const Cart = () => {
       const resp = await axios.get(
         "https://e-commerce-backend-cpp5.onrender.com/cartitems"
       );
-      console.log(resp.data);
+      // console.log(resp.data);
 
       setProducts(resp.data);
 
@@ -69,7 +69,7 @@ const Cart = () => {
       const resp = await axios.get(
         "https://e-commerce-backend-cpp5.onrender.com/cartitems"
       );
-      console.log(resp);
+      // console.log(resp);
       setData({
         [data.name]: resp.data.name,
         [data.price]: resp.data.price,
@@ -78,7 +78,7 @@ const Cart = () => {
         [data.userEmail]: resp.data.userEmail,
       });
       dispatch(setItems(resp.data.length));
-      console.log(resp.data);
+      // console.log(resp.data);
       return resp.data;
     } catch (error) {
       console.log(error);
@@ -99,7 +99,7 @@ const Cart = () => {
       id
     );
     setProducts(resp.data.w);
-    console.log(resp);
+    // console.log(resp);
   };
 
   const IncreaseItem = async (product) => {
@@ -116,7 +116,7 @@ const Cart = () => {
     );
     setProducts(resp.data);
     // setQuantity(resp.data.quantity);
-    console.log(resp);
+    // console.log(resp);
   };
 
   const notify = () => toast("Product added to cart");
@@ -134,7 +134,7 @@ const Cart = () => {
       "https://e-commerce-backend-cpp5.onrender.com/decreaseitemcart",
       id
     );
-    console.log(resp.data);
+    // console.log(resp.data);
     dispatch(setItems(resp.data.length));
     setProducts(resp.data);
     return resp.data;
@@ -156,7 +156,7 @@ const Cart = () => {
         "https://e-commerce-backend-cpp5.onrender.com/orders",
         tempArr
       );
-      console.log(resp);
+      // console.log(resp);
       //  await orderNotify();
       // toast.success("Order Placed Successfully");
       setShowPopup(true);
@@ -178,8 +178,9 @@ const Cart = () => {
   useEffect(() => {
     fetchProduct();
     fetchCartITems();
+    console.log(isLoggedIn);
 
-    console.log(products);
+    // console.log(products);
     total1();
   }, [products.length]);
 
@@ -240,7 +241,10 @@ const Cart = () => {
                   </>
                 );
               })
-            : "Your Cart is Empty"}
+            : isLoggedIn
+            ? "Your cart is empty"
+            : "User not logged in"}
+
           <ToastContainer />
         </div>
         <div className="total-amount-cart">

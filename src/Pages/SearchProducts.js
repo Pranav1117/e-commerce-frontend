@@ -15,12 +15,12 @@ const SearchProducts = () => {
   const isLoggedIn = useSelector((state) => state.slice.loggedIn);
   const dispatch = useDispatch();
 
-  console.log(locations);
+  // console.log(locations);
   const [products, setProducts] = useState([]);
 
   useEffect = () => {
     setProducts(locations.state);
-    console.log(products);
+    // console.log(products);
   };
   const notify = () => toast("Product added to cart");
 
@@ -40,7 +40,7 @@ const SearchProducts = () => {
 
       dispatch(setItems(resp.data.item));
       notify();
-      console.log(resp);
+      // console.log(resp);
     } else {
       alert("Login First to add item in Cart");
     }
@@ -53,9 +53,9 @@ const SearchProducts = () => {
 
       <div className="search-product-main-container">
         {products.length > 0
-          ? products.map((item) => {
+          ? products.map((item, i) => {
               return (
-                <>
+                <div className="search" key={i}>
                   <div className="search-product-wrapper">
                     <Link to={`/sub/${item.ids}`}>
                       <img src={item.image} />
@@ -65,7 +65,7 @@ const SearchProducts = () => {
                       </p>
                       <p className="search-product-name">{item.product}</p>
                     </Link>
-                    <button
+                    <button className="add-to-cart"
                       onClick={async () => {
                         handleAddCart(item.ids);
                       }}
@@ -73,7 +73,7 @@ const SearchProducts = () => {
                       Add to Cart
                     </button>
                   </div>
-                </>
+                </div>
               );
             })
           : "No Product Found "}

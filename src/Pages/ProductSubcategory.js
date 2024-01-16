@@ -27,7 +27,7 @@ const ProductSubcategory = () => {
 
   const isLoggedIn = useSelector((state) => state.slice.loggedIn);
 
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   const params = useParams();
 
@@ -55,7 +55,7 @@ const ProductSubcategory = () => {
 
       dispatch(setName1(resp.data.name));
 
-      console.log(resp);
+      // console.log(resp);
       setData(resp.data.data);
     } catch (err) {
       console.log(err);
@@ -108,34 +108,41 @@ const ProductSubcategory = () => {
         <div className="vertical-line"></div>
         <div className="subcat-content-container">
           {/* {loginMsg} */}
-          {data.length > 0
-            ? data
-                .filter((item) => item.subcategory === subcategory)
-                .map((item, index) => {
-                  return (
-                    <div key={index} className="subcatpage-content-wrapper">
-                      <Link to={`/sub/${item.ids}`}>
-                        <div className="subcatpage-avatar-container">
-                          <img src={item.image} alt="avatar" />{" "}
-                        </div>
+          {data.length > 0 ? (
+            data
+              .filter((item) => item.subcategory === subcategory)
+              .map((item, index) => {
+                return (
+                  <div key={index} className="subcatpage-content-wrapper">
+                    <Link to={`/sub/${item.ids}`}>
+                      <div className="subcatpage-avatar-container">
+                        <img src={item.image} alt="avatar" />{" "}
+                      </div>
 
-                        <div>Rating : {item.rating} / 5 </div>
+                      <div>Rating : {item.rating} / 5 </div>
 
-                        <div className="product-name">{item.product}</div>
+                      <div className="product-name">{item.product}</div>
 
-                        <div>Rs.{item.price}</div>
-                      </Link>
-                      <button
-                        onClick={async () => {
-                          handleAddCart(item.ids);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  );
-                })
-            : "Loadinng"}
+                      <div>Rs.{item.price}</div>
+                    </Link>
+                    <button
+                      onClick={async () => {
+                        handleAddCart(item.ids);
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                );
+              })
+          ) : (
+            <div className="wrap">
+              <div className="loading">
+                <div className="bounceball"></div>
+                <div className="text">NOW LOADING...</div>
+              </div>
+            </div>
+          )}
         </div>
         <ToastContainer />
       </div>

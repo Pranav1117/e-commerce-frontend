@@ -5,7 +5,7 @@ import MyOrders from "../Components/Orders/MyOrders";
 import { useState } from "react";
 const MyAccount = () => {
   const [showOrders, setShowOrders] = useState(false);
-  console.log("first");
+  // console.log("first");
   return (
     <>
       <Navbelt />

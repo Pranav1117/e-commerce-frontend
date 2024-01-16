@@ -49,7 +49,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
       const resp = await axios.get(
         "https://e-commerce-backend-cpp5.onrender.com/logout"
       );
-      console.log(resp);
+      // console.log(resp);
 
       localStorage.setItem("token", resp.data.token);
       toast.success("User logged Out");
@@ -71,7 +71,7 @@ const Navbelt = ({ isLoggedIn, name }) => {
       const resp = await axios.get(
         "https://e-commerce-backend-cpp5.onrender.com/cartitems"
       );
-      console.log(resp);
+      // console.log(resp);
 
       dispatch(setItems(resp.data.length));
 
@@ -106,13 +106,14 @@ const Navbelt = ({ isLoggedIn, name }) => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    console.log(searchProducts);
-
+    if (!searchProducts || searchProducts.trim() === "") {
+      return alert("Please enter a product in search bar.");
+    }
     const resp = await axios.get(
-      `https://e-commerce-backend-cpp5.onrender.com/search/${searchProducts}`
+      `https://e-commerce-backend-cpp5.onrender.com/search/${searchProducts.trim()}`
     );
     setResultProducts(resp.data);
-    console.log(resp.data);
+    // console.log(resp.data);
     nav("/searchproducts", { state: resp.data });
   };
 

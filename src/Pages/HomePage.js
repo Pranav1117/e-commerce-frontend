@@ -37,7 +37,7 @@ const HomePage = () => {
       let resp = await axios.get(
         "https://e-commerce-backend-cpp5.onrender.com/data"
       );
-      console.log(resp);
+      // console.log(resp);
 
       setData(resp.data.data);
 
@@ -51,7 +51,7 @@ const HomePage = () => {
     } catch (err) {
       setLoggedIn(false);
 
-      console.log({ msg: err, isLoggedIn: isLoggedIn });
+      // console.log({ msg: err, isLoggedIn: isLoggedIn });
     }
   };
 
@@ -78,7 +78,7 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
+                          <div key={index}>
                             <div key={index} className="abc">
                               <Link to={`/men/${item.subcategory}`}>
                                 <img
@@ -93,7 +93,7 @@ const HomePage = () => {
                                 T-shirts
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -107,8 +107,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/men/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -122,7 +122,7 @@ const HomePage = () => {
                                 Shirts
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -136,8 +136,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/men/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -151,7 +151,7 @@ const HomePage = () => {
                                 Trousers
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -165,8 +165,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/men/${item.subcategory}`}>
                                 <img
                                   alt="top-deal"
@@ -180,7 +180,7 @@ const HomePage = () => {
                                 Jackets
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -194,8 +194,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/men/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -209,7 +209,7 @@ const HomePage = () => {
                                 Shorts
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -234,8 +234,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/mobiles/${item.subcategory}`}>
                                 <img
                                   alt="top deal"
@@ -249,7 +249,7 @@ const HomePage = () => {
                                 Apple
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -263,8 +263,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/mobiles/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -278,7 +278,7 @@ const HomePage = () => {
                                 Realme
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -292,8 +292,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/mobiles/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -307,7 +307,7 @@ const HomePage = () => {
                                 Oppo
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -321,8 +321,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/mobiles/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -336,7 +336,7 @@ const HomePage = () => {
                                 Samsung
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -350,8 +350,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/mobiles/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -365,7 +365,7 @@ const HomePage = () => {
                                 Redmi
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -393,8 +393,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/electronics/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -408,7 +408,7 @@ const HomePage = () => {
                                 Earphone
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -422,8 +422,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/electronics/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -437,7 +437,7 @@ const HomePage = () => {
                                 Airpods
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -451,8 +451,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/electronics/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -466,7 +466,7 @@ const HomePage = () => {
                                 TV
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -480,8 +480,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/electronics/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -495,7 +495,7 @@ const HomePage = () => {
                                 Powerbank
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -509,8 +509,8 @@ const HomePage = () => {
                       })
                       .map((item, index) => {
                         return (
-                          <>
-                            <div key={index} className="abc">
+                          <div key={index}>
+                            <div className="abc">
                               <Link to={`/electronics/${item.subcategory}`}>
                                 <img
                                   className="men-top-deal-avatar top-deal-avatar"
@@ -524,7 +524,7 @@ const HomePage = () => {
                                 Washing Machine
                               </p>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -546,9 +546,9 @@ const HomePage = () => {
                   ? data
                       .filter((item) => item.category === "women")
                       .splice(4, 4)
-                      .map((item) => {
+                      .map((item, index) => {
                         return (
-                          <>
+                          <div key={index}>
                             <Link
                               className=""
                               to={`/women/${item.subcategory}`}
@@ -560,7 +560,7 @@ const HomePage = () => {
                               />
                               <div>{item.product}</div>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -574,9 +574,9 @@ const HomePage = () => {
                   ? data
                       .filter((item) => item.category === "accessories")
                       .splice(3, 4)
-                      .map((item) => {
+                      .map((item, index) => {
                         return (
-                          <>
+                          <div key={index}>
                             <Link to={`/accessories/${item.subcategory}`}>
                               <img
                                 src={item.image}
@@ -585,7 +585,7 @@ const HomePage = () => {
                               />
                               <div>{item.product}</div>
                             </Link>
-                          </>
+                          </div>
                         );
                       })
                   : "Loadingg"}
@@ -596,10 +596,10 @@ const HomePage = () => {
           <Footer />
         </>
       ) : (
-        <div class="wrap">
-          <div class="loading">
-            <div class="bounceball"></div>
-            <div class="text">NOW LOADING...</div>
+        <div className="wrap">
+          <div className="loading">
+            <div className="bounceball"></div>
+            <div className="text">NOW LOADING...</div>
           </div>
         </div>
       )}

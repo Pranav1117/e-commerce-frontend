@@ -33,7 +33,7 @@ const ProductDetails = () => {
 
     setData(resp.data.data);
     // console.log(data[2].ids);
-    console.log(data);
+    // console.log(data);
 
     dispatch(setLoggedInStatus(resp.data.isLoggedIn));
 
@@ -75,9 +75,9 @@ const ProductDetails = () => {
         {data
           ? data
               .filter((item) => item.ids === product)
-              .map((item) => {
+              .map((item,i) => {
                 return (
-                  <div className="detail-main-container">
+                  <div key={i} className="detail-main-container">
                     <div className="left-avatar-wrapper">
                       <img src={item.image} alt="logo" />
                     </div>

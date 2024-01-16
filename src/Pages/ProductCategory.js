@@ -16,7 +16,7 @@ import "../style.css";
 
 const ProductCategory = () => {
   const params = useParams();
-  let aa = "";
+  const [noOfProductsToShow, setNoOfProductsToShow] = useState(10);
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -34,6 +34,10 @@ const ProductCategory = () => {
 
   const [data, setData] = useState([]);
 
+  const handleProductsToshow = () => {
+    setNoOfProductsToShow((prev) => prev + 5);
+  };
+
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -42,7 +46,7 @@ const ProductCategory = () => {
       let resp = await axios(
         "https://e-commerce-backend-cpp5.onrender.com/data"
       );
-      console.log(resp);
+      // console.log(resp);
       setData(resp.data.data);
       dispatch(setLoggedInStatus(resp.data.isLoggedIn));
 
@@ -54,6 +58,7 @@ const ProductCategory = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(data);
   }, [isLoggedIn]);
 
   const notify = () => toast("Product added to cart");
@@ -74,7 +79,7 @@ const ProductCategory = () => {
 
       dispatch(setItems(resp.data.item));
       notify();
-      console.log(resp);
+      // console.log(resp);
     } else {
       setShowPopup(true);
     }
@@ -85,44 +90,52 @@ const ProductCategory = () => {
     <div>
       <Navbelt />
 
-      <div className="cat-page-heading">{`Upto 60% off on ${category} products`}</div>
+      <div className="cat-page-heading">{`Buy Top quality ${category} products`}</div>
       <div className="category-container">
         <div className="categorypage-content-container">
           {data.length > 0 ? (
             data
               .filter((item) => item.category === category)
-              .map((item) => {
+              .slice(0, noOfProductsToShow)
+              .map((item, i) => {
                 a = item.subcategory;
                 return (
-                  <>
-                    <div className="categorypage-content-wrapper">
-                      <Link to={`/sub/${item.ids}`}>
-                        <div className="category-page-avatar-container">
-                          <img src={item.image} alt="avatar" />{" "}
-                        </div>
-                        <div>Rating : {item.rating} / 5 </div>
+                  // <>
+                  <div key={i} className="categorypage-content-wrapper">
+                    <Link to={`/sub/${item.ids}`}>
+                      <div className="category-page-avatar-container">
+                        <img src={item.image} alt="avatar" />{" "}
+                      </div>
+                      <div>Rating : {item.rating} / 5 </div>
 
-                        <div className="product-name">{item.product}</div>
-                        <div>Rs.{item.price}</div>
-                      </Link>
-                      <button
-                        onClick={async () => {
-                          handleAddCart(item.ids);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  </>
+                      <div className="product-name">{item.product}</div>
+                      <div>Rs.{item.price}</div>
+                    </Link>
+                    <button
+                      onClick={async () => {
+                        handleAddCart(item.ids);
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                  // </>
                 );
               })
           ) : (
-            <div class="wrap">
-              <div class="loading">
-                <div class="bounceball"></div>
-                <div class="text">NOW LOADING...</div>
+            <div className="wrap">
+              <div className="loading">
+                <div className="bounceball"></div>
+                <div className="text">NOW LOADING...</div>
               </div>
             </div>
+          )}
+          {noOfProductsToShow < 25 && data.length > 0 ? (
+            <p className="load-more" onClick={handleProductsToshow}>
+              Load More
+            </p>
+          ) : (
+            ""
           )}
         </div>
         <ToastContainer />;

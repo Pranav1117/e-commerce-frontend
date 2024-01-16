@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "./carousel.css";
 const data = [
- 
   {
     image: require("../../Media/Carousel imgs/iphoness.jpg"),
     caption: "Iphone's",
@@ -11,8 +10,7 @@ const data = [
   {
     image: require("../../Media/Carousel imgs/sq.png"),
     caption: "Alienware's",
-    description:
-      "  “High-performance gaming systems.” Upto 45% off",
+    description: "  “High-performance gaming systems.” Upto 45% off",
   },
   {
     image: require("../../Media/Carousel imgs/cloths.avif"),
@@ -32,7 +30,7 @@ function Carousel1() {
       <Carousel activeIndex={index} onSelect={handleSelect}>
         {data.map((slide, i) => {
           return (
-            <Carousel.Item>
+            <Carousel.Item key={i}>
               <img
                 className="d-block w-100"
                 src={slide.image}

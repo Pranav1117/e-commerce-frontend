@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 const ProductDetails = () => {
   const params = useParams();
-  console.log(params.id);
+  // console.log(params.id);
   const product = params.id;
 
   const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return (
@@ -25,17 +25,15 @@ const ProductDetails = () => {
       <div className="detaipage-main-container">
         {data.length > 0
           ? data
-              .filter((item) => 
-                item === product
-              )
-              .map((item) => {
+              .filter((item) => item === product)
+              .map((item, index) => {
                 return (
-                  <>
+                  <div key={index}>
                     <div className="detail-page-big-avatar">
                       <img src={item.image} />
                       {item.price}
                     </div>
-                  </>
+                  </div>
                 );
               })
           : "Loadingg"}

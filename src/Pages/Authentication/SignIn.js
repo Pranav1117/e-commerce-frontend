@@ -18,7 +18,7 @@ const SignIn = () => {
 
   const handleonChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = async (e) => {
@@ -26,7 +26,7 @@ const SignIn = () => {
 
     const res = await axios.post("https://e-commerce-backend-cpp5.onrender.com/login", data);
     const response = res.data;
-    console.log(response);
+    // console.log(response);
 
     setLoginStatus(response.msg);
 

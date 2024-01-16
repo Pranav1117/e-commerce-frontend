@@ -22,7 +22,7 @@ const Register = () => {
 
   const handleonChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = async (e) => {
@@ -34,13 +34,13 @@ const Register = () => {
       );
 
       const response = res.data;
-      console.log(response);
+      // console.log(response);
 
       const token = response.token;
       localStorage.setItem("token", token);
 
       setRegisterStatus(response.msg);
-      console.log(registerStatus);
+      // console.log(registerStatus);
       if (response.token) {
         navigate("/");
       }
